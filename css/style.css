@@ -1,0 +1,51 @@
+body{
+    background:#fafafa;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 17px;
+}
+.webname{
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: #5e0000;
+    box-shadow: 0px 0px 0px 0px;
+    letter-spacing: 5px;
+}
+.menu{
+    float:left;
+}
+.ygr{
+    font-family: 'Megrim', cursive;
+    color: #5e0000;
+    font-size: 30px;
+    font-weight: 600;
+}
+.container{
+    height: 400px;
+}
+.navbar{
+    margin-top: 50px;
+}
+.langtitle{
+    margin: 0px 0px 0px 40px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+.langtitle:hover{
+    color: firebrick;
+}
+.active{
+    color: firebrick;
+}
+.displaytime{
+    text-align: right;
+}
+.content{
+    display: inline-block;
+    margin: 10px;
+}
+.contentimage{
+    width: 100px;
+    margin: 10px;
+}
+
