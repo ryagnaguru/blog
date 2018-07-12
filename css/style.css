@@ -1,7 +1,7 @@
 body{
     background:#fafafa;
     font-family: 'PT Sans', sans-serif;
-    font-size: 17px;
+    font-size: 14px;
 }
 .webname{
     margin-top: 10px;
@@ -20,14 +20,11 @@ body{
     font-size: 30px;
     font-weight: 600;
 }
-.container{
-    height: 400px;
-}
 .navbar{
     margin-top: 50px;
 }
 .langtitle{
-    margin: 0px 0px 0px 40px;
+    margin: 0px 0px 0px 10px;
     letter-spacing: 2px;
     font-weight: 600;
 }
@@ -40,12 +37,24 @@ body{
 .displaytime{
     text-align: right;
 }
-.content{
-    display: inline-block;
-    margin: 10px;
-}
 .contentimage{
     width: 100px;
     margin: 10px;
+    display: inline-block;
 }
+.content{
+    display: inline;
+    margin: 10px;
+}
+.content-container{
+    width: 500px;
+}
+.slimScrollDiv{
+    width: 900px;
+}
+.post-date{
+    color: #9a9a9a;
+    font-size: 12px;
+}
+
 
