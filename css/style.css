@@ -1,7 +1,7 @@
 body{
     background:#fafafa;
     font-family: 'PT Sans', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 .webname{
     margin-top: 10px;
@@ -21,7 +21,7 @@ body{
     font-weight: 600;
 }
 .navbar{
-    margin-top: 50px;
+    margin-top: 5px;
 }
 .langtitle{
     margin: 0px 0px 0px 10px;
@@ -33,6 +33,12 @@ body{
 }
 .active{
     color: firebrick;
+}
+hr {
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
 }
 .displaytime{
     text-align: right;
@@ -48,6 +54,8 @@ body{
 }
 .content-container{
     width: 500px;
+    background: #fafafa;
+    border-radius: 10px;
 }
 .slimScrollDiv{
     width: 900px;
@@ -55,6 +63,9 @@ body{
 .post-date{
     color: #9a9a9a;
     font-size: 12px;
+}
+.right-col{
+    border-left: 1px solid rgba(0,0,0,.1);
 }
 
 
