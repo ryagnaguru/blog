@@ -1,6 +1,6 @@
 $(function(){
 	$('.content-container').slimScroll({
-        height: '400px',
+        height: '450px',
         width:'inherit'
 	});
 });
