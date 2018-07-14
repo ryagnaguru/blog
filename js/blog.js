@@ -1,6 +1,13 @@
 $(function(){
-	$('.content-container').slimScroll({
-        height: '450px',
-        width:'inherit'
-	});
+	$('.content-body').slimScroll({
+          height: '680px',
+          width:'inherit'
+        });
+
+        $('.card-content').slimScroll({
+            height: '100px;',
+            width:'inherit'
+        });
+        
+        
 });
