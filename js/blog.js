@@ -5,9 +5,7 @@ $(function(){
         });
 
         $('.card-content').slimScroll({
-            height: '100px;',
+            height: '280px;',
             width:'inherit'
         });
-        
-        
 });
