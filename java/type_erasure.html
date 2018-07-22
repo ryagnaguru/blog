@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YGR</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Megrim|Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar navbar-expand-lg navbar-light bg-light ">
+            <a id="brandNameLink" class="navbar-brand" href="javascript:void()">
+                <span class="webname">
+                    <span>R.YAGNAGURU</span>
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a id= "javaLink" class="nav-link active" href="javascript:void()">
+                            <span class="langtitle active">JAVA</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <span class="langtitle">ABOUT ME</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <hr/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12">
+                    <div class="article-container">
+                        <div class="row align-items-start">
+                            <div class = "col-12">
+                                <header>
+                                    <h1>
+                                        Type Erasure and Synthetic Bridge methods in Generics.
+                                    </h1>
+                                    <p class="col-sm-12 post-date text-left">
+                                        <i class="far fa-clock"></i>
+                                        <time datetime="2018-07"> July, 2018</time>
+                                    </p>
+                                </header>
+
+                                <small><h4>Type Erasure</h4></small>
+                                <p>
+                                    Generics in Java helps programer to write a code in a generic way and it also ensure to have tighter type checks during compile
+                                    time.
+                                </p>
+
+                                <p>
+                                    The process of converting generic implementation to its nearest relevant Object type during compile time is called Type Erasure.
+                                </p>
+
+                                <div class="code-box">
+                                    <pre>
+                                        <code lang="JAVA">
+                                            public static <T> void convertArrayToCollection(T[] values) {
+                                                Collection<T> cList = new ArrayList<T>();
+                                                for (T v : values) {
+                                                    cList.add(v);
+                                                }
+                                            }
+                                        </code>
+                                    </pre>
+                                </div>
+                                <p>After Erasure,</p>
+                                <div class="code-box">
+                                    <pre>
+                                        <code lang="JAVA">
+                                            public static void convertArrayToCollection(Object[] values) {
+                                                Collection cList = new ArrayList();
+                                                for (Object v : values) {
+                                                    cList.add(v);
+                                                }
+                                            }
+                                        </code>
+                                    </pre>
+                                </div>
+                                <small><h4>Bridge Methods </h4></small>
+                                <p>
+                                    When generics was introduced, in order to support backward compatibility and as a part of type Erasure
+                                    Java compiler adds synthetic method called bridge method to a parameterized class.
+                                </p>
+                                <p>
+                                    For example, Let us look at the class below
+                                </p>
+                                <div class="code-box">
+                                    <pre>
+                                        <code lang="JAVA">
+                                                public class MyClass&lt;String&gt; {
+                                                    String data;
+                                                    
+                                                    public void setData(String data) {
+                                                        this.data = data;
+                                                    }
+                                                }
+                                        </code>
+                                    </pre>
+                                </div>
+                                <p>
+                                    During Compile time MyClass would be Type erased to
+                                </p>
+                                <div class="code-box">
+                                    <pre>
+                                        <code lang="JAVA">
+                                            public class MyClass {
+
+                                                String data;
+                                                
+                                                //without synthetic bridge method.
+                                                
+                                                public void setData(String data) {
+                                                    this.data = data;
+                                                }
+                                            }
+                                        </code>
+                                    </pre>
+                                </div>
+                                <p>
+                                    What if I would wanted to create MyClass object of RawType.
+                                </p>
+                                <p>
+                                    MyClass myClass = new MyClass(); <br/>myClass.setData("check"); // -> (1)
+                                </p>
+                                <p>
+                                    which would lead to failure in adopting Backward compatibility because there is no method in MyClass with type Object. So, JVM would add a synthetic bridge method during
+                                    compile time to accept raw types
+                                </p>
+                                <div class="code-box">
+                                    <pre>
+                                            <code lang="JAVA">
+                                                public class MyClass {
+
+                                                    String data;
+                                                    
+                                                    //with synthetic bridge method.
+                                                    public void setData(Object data) {
+                                                        setData((String) data);
+                                                    }
+                                                    
+                                                    public void setData(String data) {
+                                                        this.data = data;
+                                                    }
+                                                }
+                                            </code>
+                                        </pre>
+                                </div>
+                                <p>
+                                    Now, the (1) code snippet becomes valid due to the introduction of synthetic bridge method of type Object by the JVM; if (1) was added with different data type other than String, synthetic method would throw ClassCastException
+                                    while casting that ensures integrity.
+                                </p>
+                                <p>
+                                    Although there is no proper/clear documentation for Synthetic Bridge methods, it is identified that backward compatiblity
+                                    after Generics was introdiced in JAVA is one of the major reason for its existence in Java.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-lg-block col-sm-3 right-col">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <strong>Recent Post</strong>
+                                    </h5>
+                                    <p class="card-text">
+                                        <a href="">
+                                            With supporting text below as a natural lead-in to additional content.
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <p>© 2018 Yagnaguru Ravichandran</p>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="../js/blog.js"></script>
+    <script type="text/javascript" src="../js/content.js"></script>
+</body>
+
+</html>
