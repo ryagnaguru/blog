@@ -15,20 +15,14 @@ var recentPost = [{
 }];
 
 $(function(){
-
-    //$("#brandNameLink").attr("href", "../index.html");
-    //$("#javaLink").attr("href", "../index.html");
-
-    var i = 0;
-    for( var i =0; i< topics.length; i++ ){
-        var ele  = topics[0];
-        var content = "<p class='col-sm-8 text-justify'><a href='"+ele.link+"'>"+ele.heading+"</a><br/><small class = 'text-info'>"+ele.intro+"</small></p>";
-        var time = "<p class='col-sm-4 post-date text-center'><i class='far fa-clock'></i><time datetime='"+ele.dateTime+"'>"+ele.timeDesc+"</time>"
+    for( const {heading, intro, link, image, timeDesc, dateTime} of topics ){
+        var content = "<p class='col-sm-8 text-justify'><a href='"+link+"'>"+heading+"</a><br/><small class = 'text-info'>"+intro+"</small></p>";
+        var time = "<p class='col-sm-4 post-date text-center'><i class='far fa-clock'></i><time datetime='"+dateTime+"'>"+timeDesc+"</time>"
         content = content+time;
         var innerRow = $("<div class='row'>").html(content);
         var innerCont = $("<div class= 'col-sm-10 content'>").append(innerRow);
-        var image = "<img src='"+ele.image+"' class='contentimage img-thumbnail'>";
-        var imgDiv = $("<div class=' d-none d-sm-block d-md-block col-sm-2'>").html(image);
+        var img = "<img src='"+image+"' class='contentimage img-thumbnail'>";
+        var imgDiv = $("<div class=' d-none d-sm-block d-md-block col-sm-2'>").html(img);
         var imgRow = $($("<div  class='row'>").append(imgDiv).append(innerCont));
         var contentSec = $("<div  class='col-sm-12 content-sec'>").html(imgRow);
         $("#scrollIndex").append(contentSec);   
@@ -38,10 +32,9 @@ $(function(){
     $("#recentPost").html(title);
     var self = $("#selfNavigate").val() == "1";
     
-    for( var i =0; i<recentPost.length; i++ ){
-        var ele = recentPost[i];
-        var link = self? "../"+ele.tag+"/"+ele.page : "./"+ele.tag+"/"+ele.page;
-        var con ="<p class='card-text'><a href='"+link+"'>"+ele.desc+".</a></p>";
+    for(const {desc, tag, page } of  recentPost){
+        var link = self? "../"+tag+"/"+page : "./"+tag+"/"+page;
+        var con ="<p class='card-text'><a href='"+link+"'>"+desc+".</a></p>";
         $("#recentPost").html(con);
     }
 

@@ -13,12 +13,13 @@
     <link rel="stylesheet" href="../css/article.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
         crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../images/ygr.png" />
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar navbar navbar-expand-lg navbar-light bg-light ">
-            <a id="brandNameLink" class="navbar-brand" href=../index.html">
+            <a class="navbar-brand" href="../index.html">
                 <span class="webname">
                     <span>R.YAGNAGURU</span>
                 </span>
@@ -30,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a id= "javaLink" class="nav-link active" href="../index.html">
+                        <a class="nav-link active" href="../index.html">
                             <span class="langtitle active">JAVA</span>
                         </a>
                     </li>
@@ -48,7 +49,18 @@
                 <div class="col-lg-9 col-md-12 col-sm-12">
                     <div class="article-container">
                         <div class="row align-items-start">
-                            <div class = "col-12">
+                            <div class="col-12">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="../index.html">Java</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Type Erasure..</li>
+                                    </ol>
+                                </nav>
                                 <header>
                                     <h1>
                                         Type Erasure and Synthetic Bridge methods in Generics.
@@ -59,16 +71,16 @@
                                     </p>
                                 </header>
 
-                                <small><h4>Type Erasure</h4></small>
+                                <small>
+                                    <h4>Type Erasure</h4>
+                                </small>
                                 <p>
                                     Generics in Java helps programer to write a code in a generic way and it also ensure to have tighter type checks during compile
                                     time.
                                 </p>
-
                                 <p>
                                     The process of converting generic implementation to its nearest relevant Object type during compile time is called Type Erasure.
                                 </p>
-
                                 <div class="code-box">
                                     <pre>
                                         <code lang="JAVA">
@@ -94,10 +106,12 @@
                                         </code>
                                     </pre>
                                 </div>
-                                <small><h4>Bridge Methods </h4></small>
+                                <small>
+                                    <h4>Bridge Methods </h4>
+                                </small>
                                 <p>
-                                    When generics was introduced, in order to support backward compatibility and as a part of type Erasure
-                                    Java compiler adds synthetic method called bridge method to a parameterized class.
+                                    When generics was introduced, in order to support backward compatibility and as a part of type Erasure Java compiler adds
+                                    synthetic method called bridge method to a parameterized class.
                                 </p>
                                 <p>
                                     For example, Let us look at the class below
@@ -138,11 +152,12 @@
                                     What if I would wanted to create MyClass object of RawType.
                                 </p>
                                 <p>
-                                    MyClass myClass = new MyClass(); <br/>myClass.setData("check"); // -> (1)
+                                    MyClass myClass = new MyClass();
+                                    <br/>myClass.setData("check"); // -> (1)
                                 </p>
                                 <p>
-                                    which would lead to failure in adopting Backward compatibility because there is no method in MyClass with type Object. So, JVM would add a synthetic bridge method during
-                                    compile time to accept raw types
+                                    which would lead to failure in adopting Backward compatibility because there is no method in MyClass with type Object. So,
+                                    JVM would add a synthetic bridge method during compile time to accept raw types
                                 </p>
                                 <div class="code-box">
                                     <pre>
@@ -164,19 +179,21 @@
                                         </pre>
                                 </div>
                                 <p>
-                                    Now, the (1) code snippet becomes valid due to the introduction of synthetic bridge method of type Object by the JVM; if (1) was added with different data type other than String, synthetic method would throw ClassCastException
-                                    while casting that ensures integrity.
+                                    Now, the (1) code snippet becomes valid due to the introduction of synthetic bridge method of type Object by the JVM; if
+                                    (1) was added with different data type other than String, synthetic method would throw
+                                    ClassCastException while casting that ensures integrity.
                                 </p>
                                 <p>
-                                    Although there is no proper/clear documentation for Synthetic Bridge methods, it is identified that backward compatiblity
-                                    after Generics was introdiced in JAVA is one of the major reason for its existence in Java.
+                                    Although there is no proper/clear documentation for Synthetic Bridge methods, it is identified that to support backward compatiblity
+                                    after Generics was introduced in JAVA would be one of the major reason for its existence
+                                    in Java.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-none d-lg-block col-sm-3 right-col">
-                    <input id ="selfNavigate"  type="hidden" value="1">
+                    <input id="selfNavigate" type="hidden" value="1">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -184,7 +201,7 @@
                                     <h5 class="card-title">
                                         <strong>Recent Post</strong>
                                     </h5>
-                                    <div id = "recentPost">
+                                    <div id="recentPost">
                                     </div>
                                 </div>
                             </div>
