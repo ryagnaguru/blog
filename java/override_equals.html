@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YGR</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Megrim|Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../images/ygr.png" />
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+            <a class="navbar-brand" href="../index.html">
+                <span class="webname">
+                    <span>R.YAGNAGURU</span>
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../index.html">
+                            <span class="langtitle active">JAVA</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <span class="langtitle">ABOUT ME</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <hr/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12">
+                    <div class="article-container">
+                        <div class="row align-items-start">
+                            <div class="col-12">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="../index.html">Java</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Override Equals..</li>
+                                    </ol>
+                                </nav>
+                                <header>
+                                    <h1>
+                                        Overriding Equals method - @override equals().
+                                    </h1>
+                                    <p class="col-sm-12 post-date text-left">
+                                        <i class="far fa-clock"></i>
+                                        <time datetime="2018-07"> July, 2018</time>
+                                    </p>
+                                </header>
+
+                                <p>
+                                    Sometimes we may need to know if two objects of a value class contains same value, predominantly this could be the major
+                                    reason for a developer to override equals method of Object class; if anything else could
+                                    be reason better not override equals because in anyother case an object of a class will
+                                    always be equal only to itself.
+                                </p>
+                                <p>
+                                    However, having liberty of overriding the equals method, we should know when not to, how to and also when to override equals
+                                    method.
+                                </p>
+
+                                <p>
+                                    When not to ?
+                                    <ul>
+                                        <li>
+                                            If instance of your class is inherently unique. for example instance of Thread class, the implementation of equals in Object
+                                            class itself is suffice for Thread to perform at fullest.
+                                        </li>
+                                        <li>
+                                            When you dont require to check ("logical equality test") if the values of the object are same.
+                                        </li>
+                                        <li>
+                                            When parent class has its equals overidden.
+                                        </li>
+                                        <li>
+                                            If your know that equals of the class never gonna be called.
+                                        </li>
+                                        <li>
+                                            If your class is instance controlled - eg: singleton. 
+                                        </li>
+                                    </ul>
+                                </p>
+
+                                <p>
+                                        How to? You will have to adhere some general contracts while you override
+                                        equals. <br>
+                                        The explanations and examples assume the object reference are always
+                                        not-null objects and values
+                                </p>
+
+                                <small>
+                                    <h4>
+                                        Reflexive:
+                                    </h4>
+                                </small>
+                                <span>
+                                    <em>For any value x in an object, x.equals(x) should be true.</em>
+                                </span>
+                                <br>
+
+                                <div class="code-box">
+                                    <pre>
+                                        <code lang="JAVA">
+                                            public class Example{
+
+                                                private String x;
+                                                
+                                                public String getX(){
+                                                    return this.x;
+                                                }
+                                                
+                                                public void setX(){
+                                                    this.x = x;
+                                                }
+                                                
+                                                @override public boolean equals(Object o){
+                                                
+                                                    if( !o instanceof Example){
+                                                        return false;
+                                                    }
+                                                    if( this.x.equals((Example)o)){
+                                                    }
+                                                    return false;	
+                                                }
+                                            }
+
+                                            public class Main{
+
+                                                public static void main(String args[]){
+                                                    List&lt;Example&gt; exampleList = new ArrayList();
+                                                    Example example = new Example();
+                                                    exampleList.add(example);		
+                                                    System.out.println(exampleList.contains(example));	
+                                                }
+                                            }
+                                        </code>
+                                    </pre>
+                                </div>
+                                <p>output: false</p>
+                                <p>
+                                    Any inappropriate equal override will return false for a simple check of an object existence in a Collection after adding
+                                    into it.
+                                </p>
+
+                                <small>
+                                    <h4>
+                                        Symmetric:
+                                    </h4>
+                                </small>
+                                <span>
+                                    <em>For any value of x in an object, if x.equals(y) is true then y.equals(x) also should
+                                        be true.</em>
+                                </span>
+                                <br>
+                                <p>
+                                    First let us understand how this could fail,
+                                </p>
+                                <div class="code-box">
+                                    <pre>
+                                        <code lang="JAVA">
+                                            public class Example{
+
+                                                private String x;
+                                                
+                                                public Exmaple(String x){
+                                                    this.x = x;
+                                                }
+                                                
+                                                public String getX(){
+                                                    return this.x;
+                                                }
+                                                
+                                                public void setX(){
+                                                    this.x = x;
+                                                }
+                                                
+                                                @override public boolean equals(Object o){
+                                                    if( o instanceof Example){
+                                                        return	x.equalsIgnoreCase(((Example)o).x);
+                                                    }
+                                                    if( o instanceof String ){
+                                                        return	x.equalsIgnoreCase((String)	o); 
+                                                    }
+                                                }
+                                            }
+                                        </code>
+                                    </pre>
+                                </div>
+                                <p>
+                                    What happens ? Say we have,
+                                    <br/>
+                                    <br/> Example ex = new Example("great");
+                                    <br/> String st = "great";
+                                    <br/>
+                                    <br/> ex.equals(st) returns true
+                                    <br/> Ok, but
+                                    <br/> st.equals(ex) retuns false
+                                    <br>beacause st a String type has no possibility of knowing what cis is and failed. A perfect
+                                    symmetrical failure.
+                                    <br/>
+                                    <br> What should have been done ?
+                                    <br/>
+                                    <br/> The basic mistake here is we are trying to interoperate two different types, we will
+                                    have to eliminate this inappropriate comparison by refactoring the equals overiride into
+                                    <br/>
+                                </p>
+
+                                <div class="code-box">
+                                    <pre>
+                                        <code lang="JAVA">
+                                            @Override public boolean equals(Object o) { 
+                                                return o instanceof Example && 
+                                                    ((Example) o).x.equalsIgnoreCase(x); 
+                                            }
+                                        </code>
+                                    </pre>
+                                </div>
+                                <p>
+                                    This will return false when two different types are compared.
+                                </p>
+                            </div>
+                            <nav class="ml-auto">
+                                <ul class="pagination pagination-lg">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="javascript:void()" tabindex="-1">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="./override_equals1.html">2</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-lg-block col-sm-3 right-col">
+                    <input id="selfNavigate" type="hidden" value="1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <strong>Recent Post</strong>
+                                    </h5>
+                                    <div id="recentPost">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <p>© 2018 Yagnaguru Ravichandran</p>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="../js/blog.js"></script>
+    <script type="text/javascript" src="../js/content.js"></script>
+</body>
+
+</html>
