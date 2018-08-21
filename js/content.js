@@ -1,6 +1,14 @@
 var base_link = "D:/YagnaGuru/blog/"
 var topics = [
     {
+        heading: "Serializable !! What actually it is ??",
+        intro: "Serializable is an marker interface, means it doenst have any method in it",
+        link: "./java/serializable.html",
+        image: "https://ablfnto6n.cloudimg.io/width/300/x/https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2059a86937844c84267d5126e5b36aa3&auto=format&fit=crop&w=750&q=80",
+        timeDesc: "August 2018",
+        dateTime: "2018-08"
+    },
+    {
         heading: "Overriding Hash Code method - @override hashCode()",
         intro: "There are some contracts that has to be followed while overriding hashcode",
         link: "./java/override_hash.html",
@@ -31,6 +39,11 @@ var topics = [
 
 var recentPost = [
     {
+        desc: "Serializable !! What actually it is ??",
+        tag: "java",
+        page: "serializable.html"
+    },
+    {
         desc: "Overriding Hash Code method - @override hashCode()",
         tag: "java",
         page: "override_hash.html"
@@ -49,7 +62,7 @@ var recentPost = [
 
 $(function () {
     for (const { heading, intro, link, image, timeDesc, dateTime } of topics) {
-        var content = "<p class='col-sm-8 text-justify'><a href='" + link + "'>" + heading + "</a><br/><small class = 'text-info'>" + intro + "</small></p>";
+        var content = "<p class='col-sm-8 text-justify'><a href='" + link + "'><span class = 'text-info'><u>" + heading + "</u></span></a><br/><small>" + intro + "</small></p>";
         var time = "<p class='col-sm-4 post-date text-center'><i class='far fa-clock'></i><time datetime='" + dateTime + "'>" + timeDesc + "</time>"
         content = content + time;
         var innerRow = $("<div class='row'>").html(content);
@@ -66,9 +79,14 @@ $(function () {
     var self = $("#selfNavigate").val() == "1";
 
     let rc = '';
+    const max_recent_post = 5;
+    let post = 1;
     for (const { desc, tag, page } of recentPost) {
-        const link = self ? "../" + tag + "/" + page : "./" + tag + "/" + page;
-        rc += "<p class='card-text'><a href='" + link + "'>" + desc + ".</a></p>";
+        if( post <= max_recent_post){
+            const link = self ? "../" + tag + "/" + page : "./" + tag + "/" + page;
+            rc += "<p class='card-text'><a href='" + link + "'><u>" + desc + ".</u></a></p>";
+            post++;
+        }
     }
     $("#recentPost").html(rc);
 

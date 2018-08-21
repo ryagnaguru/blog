@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YGR</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Megrim|Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../images/ygr.png" />
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+            <a class="navbar-brand" href="../index.html">
+                <span class="webname">
+                    <span>R.YAGNAGURU</span>
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../index.html">
+                            <span class="langtitle active">JAVA</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <span class="langtitle">ABOUT ME</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <hr/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12">
+                    <div class="article-container">
+                        <div class="row align-items-start">
+                            <div class="col-12">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="../index.html">Java</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Serializable..</li>
+                                    </ol>
+                                </nav>
+                                <header>
+                                    <h1>
+                                        Serializable !! What actually it is ??.
+                                    </h1>
+                                    <p class="col-sm-12 post-date text-left">
+                                        <i class="far fa-clock"></i>
+                                        <time datetime="2018-08"> August, 2018</time>
+                                    </p>
+                                </header>
+                                <p>
+
+                                    Serializable is an marker interface, means it doenst have any method in it.
+                                    <br><br> Serializable interface holds the state of object graph, converts it into a array of
+                                    bytes, move it around network inorder to write it to a file, disk, db or whatever, it
+                                    also takes care of the reverse process.
+                                    <br>
+                                    <br> Any Object that you wanted to write externally will have to implement Serializable interface.
+                                    Java by itself impelements Serializable on many of its clasess, to know what are they
+                                    find it
+                                    <a href="https://docs.oracle.com/javase/6/docs/api/java/io/class-use/Serializable.html"><u>here</u></a>.
+                                    <br>
+                                    <br> If Serializable is required for utmost every class why didnt it was made default ?
+                                    <br> Three things,
+                                    <br>
+                                    <ul>
+                                        <li>
+                                            Primarily, not all objects need to be serialized, for example Thread objects, these objects are bound to JVM and need not
+                                            be persisted anywhere.
+                                        </li>
+                                        <li>
+                                            A serialized object state becomes a class' compatibility contract, to maintain this contract across class version requires
+                                            additional effort and conideration.
+                                        </li>
+                                        <li>
+                                            Private members of a class is not accessible, however serialization allows access to those private members of the class.
+                                            Because Serialization binary format is fully documented and reversible, we will
+                                            be easily able to figure out how the class looks and even values of the fields
+                                            from serialized stream.
+                                        </li>
+                                    </ul>
+                                    <br> To overcome the threat of private member access from Serializable stream be, you can
+                                    always add the below two methods in your class which Serializable can use.
+                                    <br>
+
+                                    <div class="code-box">
+                                        <pre>
+                                            <code lang="JAVA">
+                                                private void writeObject(ObjectOutputStream stream ){
+                                                    // Encrypt or obscure any significant values
+                                                }
+                                                
+                                                private void readObject(ObjectInputStream stream ){
+                                                    // Debcrypt or deobscure any significant values
+                                                }
+                                            </code>
+                                        </pre>
+                                    </div>
+                                    <br> Adding to the above option, we can also secure your class by using <code>javax.crypto.SealedObject</code>
+                                    or <code>java.security.SignedObject</code> wrappers around your original object. A key is used to
+                                    encrypt and decrypt the wrapper that has your original object.
+                                    <br><br> Apart from being responsible for byte array serialization, Serializable takes care of
+                                    maintaining compatibility for class versions.
+                                    <br><br> You will need serialVersionUID if Serializable has to maintain compatbility of class
+                                    versions for you, and we have three ways to achieve this serialVersionUID
+                                    <br>
+                                    <br>
+                                    <ul>
+                                        <li>
+                                            <code lang="java">
+                                                private static final long serialVersionUID = 1L; //default
+                                            </code>
+                                        </li>
+                                        <li>
+                                            <code lang="java">
+                                                private static final long serialVersionUID = -3275463246725342722890L; // generated
+                                            </code>
+                                        </li>
+                                        <li>
+                                            when you dont declare serialVersionUID JVM generates it for you. Find the algorithm
+                                            <a href="https://docs.oracle.com/javase/6/docs/platform/serialization/spec/class.html#4100"><u>here</u></a>
+                                        </li>
+                                    </ul>
+                                    <br> To find Compatible changes and Incompatible changes that you can make on the serializabled
+                                    class click
+                                    <a href="https://docs.oracle.com/javase/6/docs/platform/serialization/spec/version.html#6678"><u>here</u></a>
+                                    <br>
+                                    <br> 
+                                    How this serialVersionUID helps in maintaining class compatibility across versions ?
+                                    <br><br> Let us consider the below scenario,
+                                    <br><br> When you serialize a class Emp and store the state of the object as emp1 in disk, and
+                                    if you alter the structure of the class Emp and upgrade it to Emp2 and then you deserialize
+                                    the emp1, what happens ?
+                                    <br><br> If serialVersionUID is same for Emp and Emp2, emp1 object can be parsed to Emp2 not
+                                    just that Emp2 object can also be deserialized to Emp that serves as a backward compatibility.
+                                    <br><br> But, if the serialVersionUID is different from Emp and Emp2, you cant deserialize the
+                                    emp1 unless you regain access to Emp the original class.
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-lg-block col-sm-3 right-col">
+                    <input id="selfNavigate" type="hidden" value="1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <strong>Recent Post</strong>
+                                    </h5>
+                                    <div id="recentPost">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <p>© 2018 Yagnaguru Ravichandran</p>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="../js/blog.js"></script>
+    <script type="text/javascript" src="../js/content.js"></script>
+</body>
+
+</html>
